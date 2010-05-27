@@ -24,7 +24,7 @@ var Properties = new Class({
 		args.shift();
 		//some code 
 		if(this.properties[name] && typeof this.properties[name].set == 'function') this.properties[name].set.apply(this, args);
-		else this.properties[name] = args[1];
+		else this.properties[name] = args[0];
 
 		return this
 	},
