@@ -4,7 +4,7 @@ description: Property feature for Class
 
 license: MIT-style
 
-anthors:
+authors:
 - chenxingyu
 
 requires:
