@@ -16,24 +16,25 @@ provides: [Properties]
 */
 
 var Properties = new Class({
-	set: function(key, value)
-	{
-		if (!this.properties) return null;
-		if (!this.properties[key]) return null;
-		if (!this.properties[key].set) return null;
-		if ($type(this.properties[key].set) != 'function') return null;
-		
-		this.properties[key].set.bind(this).run(value);
-		return value;
+	properties: {},
+	set: function (name) {
+
+		var args = $A(arguments);
+		//remove the first argument 
+		args.shift();
+		//some code 
+		if(this.properties[name] && typeof this.properties[name].set == 'function') this.properties[name].set.apply(this, args);
+		else this.property[name] = args[1];
+
+		return this
 	},
+
+	//note, we can pass more than one argument to the getter 
+	get: function (name) {
+
+		var args = $A(arguments);
+		args.shift();
 	
-	get: function(key)
-	{
-		if (!this.properties) return null;
-		if (!this.properties[key]) return null;
-		if (!this.properties[key].get) return null;
-		if ($type(this.properties[key].get) != 'function') return null;
-		
-		return this.properties[key].get.bind(this).run();
+		return this.properties[name] && typeof this.properties[name].get == 'function' ? this.properties[name].get.apply(this, args) : this.properties[name];
 	}
 });
