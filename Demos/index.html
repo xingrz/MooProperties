@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>MooProperties</title>
+<script type="text/javascript" src="../mootools.js"></script>
+<script type="text/javascript" src="../Source/mooproperties.js"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+
+	var MyClass = new Class({
+		Implements: [Options, Properties],
+		
+		options: {
+			myName: 'Moo',
+			myAge: 18
+		},
+		
+		// An Object defining properties to set/get
+		properties: {
+			// The property 'Name'
+			name: {
+				//more than one argument
+				set: function(name, firstname)
+				{
+					// .. Do something you want ...
+					
+					if(firstname) name = firstname + ' ' + name;
+					this.options.myName = name; //Set the value
+				},
+				get: function()	//Executes when call the 'get' method like myClass.get('name')
+				{
+					// .. Do something you want ...
+					return this.options.myName; //Return the value
+				}
+			},
+			age: {
+				set: function(value)
+				{
+					this.options.myAge = value;
+				},
+				get: function()
+				{
+					return this.options.myAge;
+				}
+			}
+		},
+		
+		initialize: function(options)
+		{
+			this.setOptions(options);
+			
+			// your codes....
+		}
+	});
+
+	var myClass = new MyClass();
+	
+	if(window.console && console.log) {
+		
+		myClass.set('name', 'Tom');	//Set the property 'Name' to 'Tom'
+		console.log(myClass.get('name'));
+		
+		myClass.set('name', 'Tom', 'Jedusor');
+		console.log(myClass.get('name'));
+		
+		console.log(myClass.get('age'));
+	}
+//]]></script>
+</head><body>See the result in the console</body></html>
