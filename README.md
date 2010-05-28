@@ -59,3 +59,15 @@ Now you can do things like:
 	var myClass = new MyClass();
 	myClass.set('name', 'Tom');	//Set the property 'Name' to 'Tom'
 	myClass.get('age');	//Return 18.
+
+or even looks cool like:
+
+	var myClass = new MyClass();
+	myClass.set({
+		'name': 'Tom',
+		'age': 27
+	});
+
+See the demo for details.
+
+Enjoys!

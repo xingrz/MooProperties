@@ -59,14 +59,24 @@
 	var myClass = new MyClass();
 	
 	if(window.console && console.log) {
+		// set the property 'name' and get it.
+		console.log("myClass.set('name', 'Potter');");
+		myClass.set('name', 'Potter');
+		console.log("Name: " + myClass.get('name'));
 		
-		myClass.set('name', 'Potter');	//Set the property 'Name' to 'Tom'
-		console.log(myClass.get('name'));
-		
+		// set the property 'name' with two argument passing to the setter, then get 'name' and 'age'.
+		console.log("myClass.set('name', 'Potter', 'Harry');");
 		myClass.set('name', 'Potter', 'Harry');
-		console.log(myClass.get('name'));
+		console.log("Name: " + myClass.get('name'));
+		console.log("Age: " + myClass.get('age'));
 		
-		console.log(myClass.get('age'));
+		// set properties 'name' and 'age' at the same time by passing an object.
+		console.log("myClass.set({'name': 'Jake', 'age': 24});");
+		myClass.set({
+			'name': 'Jake',
+			'age': 24
+		});
+		console.log("Name: " + myClass.get('name') + ", Age: " + myClass.get('age'));
 	}
 //]]></script>
 </head><body>See the result in the console</body></html>
