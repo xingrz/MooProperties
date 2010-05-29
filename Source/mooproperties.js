@@ -19,9 +19,16 @@ var Properties = new Class({
 	properties: {},
 	set: function (name) {
 
+		if($type(name) == 'object') {
+		
+			$each(name, function (value, key) { this.set(key, value) }, this);
+			return this
+		}
+		
 		var args = $A(arguments);
 		//remove the first argument 
 		args.shift();
+		
 		//some code 
 		if(this.properties[name] && typeof this.properties[name].set == 'function') this.properties[name].set.apply(this, args);
 		else this.properties[name] = args[0];
