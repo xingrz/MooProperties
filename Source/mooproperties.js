@@ -43,5 +43,26 @@ var Properties = new Class({
 		args.shift();
 	
 		return this.properties[name] && typeof this.properties[name].get == 'function' ? this.properties[name].get.apply(this, args) : this.properties[name];
+	},
+	
+	//define setter/getter
+	setProperty: function(name, property) {
+	
+		this.properties[name] = property;
+		
+		return this
+	},
+	
+	removeProperty: function(name) {
+	
+		delete this.properties[name];
+		
+		return this
+	},
+	
+	setProperties: function(properties) {
+	
+		$each(properties, function (property, name) { this.setProperty(name, property) }, this);
+		return this
 	}
 });
