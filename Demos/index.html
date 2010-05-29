@@ -10,6 +10,36 @@
 <script type="text/javascript">
 //<![CDATA[
 
+	// An Object defining properties to set/get
+	var properties = {
+			// The property 'Name'
+			name: {
+					//more than one argument for this setter
+					set: function(name, firstname)
+					{
+						// .. Do something you want ...
+						
+						if(firstname) name = firstname + ' ' + name;
+						this.options.myName = name; //Set the value
+					},
+					get: function()	//Executes when call the 'get' method like myClass.get('name')
+					{
+						// .. Do something you want ...
+						return this.options.myName; //Return the value
+					}
+			},
+			age: {
+					set: function(value)
+					{
+						this.options.myAge = value;
+					},
+					get: function()
+					{
+						return this.options.myAge;
+					}
+			}
+		};
+		
 	var MyClass = new Class({
 		Implements: [Options, Properties],
 		
@@ -18,35 +48,36 @@
 			myAge: 18
 		},
 		
-		// An Object defining properties to set/get
-		properties: {
-			// The property 'Name'
-			name: {
-				//more than one argument
-				set: function(name, firstname)
-				{
-					// .. Do something you want ...
-					
-					if(firstname) name = firstname + ' ' + name;
-					this.options.myName = name; //Set the value
-				},
-				get: function()	//Executes when call the 'get' method like myClass.get('name')
-				{
-					// .. Do something you want ...
-					return this.options.myName; //Return the value
-				}
-			},
-			age: {
-				set: function(value)
-				{
-					this.options.myAge = value;
-				},
-				get: function()
-				{
-					return this.options.myAge;
-				}
-			}
-		},
+		// properties to setter/getter can also be defined this way
+		/*
+			properties: {
+							// The property 'Name'
+							name: {
+								//more than one argument
+								set: function(name, firstname)
+								{
+									// .. Do something you want ...
+									
+									if(firstname) name = firstname + ' ' + name;
+									this.options.myName = name; //Set the value
+								},
+								get: function()	//Executes when call the 'get' method like myClass.get('name')
+								{
+									// .. Do something you want ...
+									return this.options.myName; //Return the value
+								}
+							},
+							age: {
+								set: function(value)
+								{
+									this.options.myAge = value;
+								},
+								get: function()
+								{
+									return this.options.myAge;
+								}
+							}
+		}, */
 		
 		initialize: function(options)
 		{
@@ -57,6 +88,8 @@
 	});
 
 	var myClass = new MyClass();
+	
+	myClass.setProperties(properties);
 	
 	if(window.console && console.log) {
 		// set the property 'name' and get it.

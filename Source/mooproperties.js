@@ -17,42 +17,52 @@ provides: [Properties]
 
 var Properties = new Class({
 	properties: {},
-	set: function (name)
-	{
-		if ($type(name) == 'object')
-		{
-			var pties = $H(name);
-			pties.each(function(v, n) {
-				this.set(n, v);
-			}, this);
+	set: function (name) {
+
+		if($type(name) == 'object') {
+		
+			$each(name, function (value, key) { this.set(key, value) }, this);
+			return this
 		}
-		else
-		{
-			var args = $A(arguments);
-			args.shift();
-			
-			if (this.properties[name] && $type(this.properties[name].set) == 'function')
-			{
-				this.properties[name].set.apply(this, args);
-			}
-			else
-			{
-				this[name] = args[0];
-			}
-		}
-		return this;
-	},
-	get: function (name) {
+		
 		var args = $A(arguments);
+		//remove the first argument 
 		args.shift();
 		
-		if (this.properties[name] && $type(this.properties[name].get) == 'function')
-		{
-			return this.properties[name].get.apply(this, args);
-		}
-		else
-		{
-			return this[name];
-		}
+		//some code 
+		if(this.properties[name] && typeof this.properties[name].set == 'function') this.properties[name].set.apply(this, args);
+		else this.properties[name] = args[0];
+
+		return this
+	},
+
+	//note, we can pass more than one argument to the getter 
+	get: function (name) {
+
+		var args = $A(arguments);
+		args.shift();
+	
+		return this.properties[name] && typeof this.properties[name].get == 'function' ? this.properties[name].get.apply(this, args) : this.properties[name];
+	},
+	
+	//define setter/getter
+	setProperty: function(name, property) {
+	
+		this.properties[name] = property;
+		
+		return this
+	},
+	
+	removeProperty: function(name) {
+	
+		delete this.properties[name];
+		
+		return this
+	},
+	
+	setProperties: function(properties) {
+	
+		$each(properties, function (property, name) { this.setProperty(name, property) }, this);
+		return this
 	}
 });
